@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HC Configure - 訂製您的HC</title>
+    <!-- 載入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Lucide Icons for aesthetic appeal -->
+    <style>
+        /* 使用 Inter 作為主要字體，並回退到 sans-serif */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, 'Noto Sans TC', sans-serif;
+            background-color: #f4f7fa; /* 淺灰色背景 */
+        }
+        /* 自定義滾動條以匹配現代風格 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 頂部導航/標頭 -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">HC Configure</h1>
+            <button onclick="window.open('https://hc-cars-taiwan.webnode.page/car-model-information', '_blank')"
+                    class="px-4 py-2 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition duration-150 shadow-lg">
+                選擇其他車型
+            </button>
+        </div>
+    </header>
+
+    <!-- 主配置區塊 -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <!-- 車型標題與預覽區塊 (現在佔據整行) -->
+        <div class="mb-10">
+            <div class="bg-white p-6 rounded-xl shadow-xl">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-2">訂製您的 HC Terra</h2>
+                <p class="text-lg text-gray-600 mb-6">Terra：性能與豪華的完美結合。選擇您的配置。</p>
+                
+                <!-- 視覺預覽區 (Placeholder) -->
+                <div id="car-preview" class="w-full h-64 bg-slate-200 rounded-lg flex items-center justify-center text-gray-500 font-semibold border-4 border-slate-300">
+                    [汽車視覺預覽區 - 根據選配顯示車色/輪圈/套件]
+                    <br>
+                    目前選擇：<span id="preview-color" class="font-bold text-gray-700 ml-1">白-標準漆</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 配置選項區塊 -->
+        <form id="config-form" class="bg-white p-6 rounded-xl shadow-xl">
+            <!-- 配置區塊容器 -->
+            <div class="space-y-10">
+
+                <!-- 1. 動力規格 (Powertrain) -->
+                <section>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">1. 動力規格</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="powertrain" value="2.0L" data-price="2100000" checked class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">2.0L I4 Twin-Turbo (300PS)</span>
+                            <span class="ml-3 text-sm text-gray-600 block">搭配HC AT-8變速箱以及AWD</span>
+                            <span class="ml-3 font-bold text-lg text-blue-600 block mt-1">$2,100,000 (基本售價)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="powertrain" value="3.0L" data-price="2500000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">3.0L I6 Twin-Turbo (430PS)</span>
+                            <span class="ml-3 text-sm text-gray-600 block">搭配HC AT-8變速箱以及AWD</span>
+                            <span class="ml-3 font-bold text-lg text-blue-600 block mt-1">$2,500,000</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="powertrain" value="Hybrid" data-price="2400000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">I4 Hybrid Twin-Turbo (綜效420PS)</span>
+                            <span class="ml-3 text-sm text-gray-600 block">搭配HC AT-8變速箱以及AWD</span>
+                            <span class="ml-3 font-bold text-lg text-blue-600 block mt-1">$2,400,000</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="powertrain" value="Electric" data-price="2450000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Electric (350PS)</span>
+                            <span class="ml-3 text-sm text-gray-600 block">搭配HC EV-1變速箱以及AWD</span>
+                            <span class="ml-3 font-bold text-lg text-blue-600 block mt-1">$2,450,000</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- 2. 風格套件 (Style Package) -->
+                <section>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">2. 風格套件</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="style-package" value="Basic" data-price="0" checked class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra Basic 套件</span>
+                            <span class="ml-3 text-sm text-gray-600 block">$0</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="style-package" value="Z Sport" data-price="180000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Z Sport 套件</span>
+                            <span class="ml-3 text-sm text-gray-600 block">+ $180,000</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- 3. 外觀車色 (Exterior Color) -->
+                <section>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">3. 外觀車色</h3>
+                    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- Color Option Template -->
+                        <div class="text-center">
+                            <input type="radio" name="color" id="color-white" value="white" data-price="0" checked class="hidden peer">
+                            <label for="color-white" class="block cursor-pointer p-2 border-4 border-transparent rounded-lg hover:border-blue-300 peer-checked:border-blue-500 transition duration-200">
+                                <div class="w-12 h-12 mx-auto bg-white border border-gray-300 rounded-full shadow-md mb-2"></div>
+                                <span class="text-sm font-medium">白-標準漆 ($0)</span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="radio" name="color" id="color-black" value="black" data-price="0" class="hidden peer">
+                            <label for="color-black" class="block cursor-pointer p-2 border-4 border-transparent rounded-lg hover:border-blue-300 peer-checked:border-blue-500 transition duration-200">
+                                <div class="w-12 h-12 mx-auto bg-gray-900 border border-gray-300 rounded-full shadow-md mb-2"></div>
+                                <span class="text-sm font-medium">黑-標準漆 ($0)</span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="radio" name="color" id="color-grey" value="grey" data-price="0" class="hidden peer">
+                            <label for="color-grey" class="block cursor-pointer p-2 border-4 border-transparent rounded-lg hover:border-blue-300 peer-checked:border-blue-500 transition duration-200">
+                                <div class="w-12 h-12 mx-auto bg-gray-500 border border-gray-300 rounded-full shadow-md mb-2"></div>
+                                <span class="text-sm font-medium">灰-標準漆 ($0)</span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="radio" name="color" id="color-matte" value="matte-grey" data-price="25000" class="hidden peer">
+                            <label for="color-matte" class="block cursor-pointer p-2 border-4 border-transparent rounded-lg hover:border-blue-300 peer-checked:border-blue-500 transition duration-200">
+                                <div class="w-12 h-12 mx-auto bg-gray-700 rounded-full shadow-md mb-2"></div>
+                                <span class="text-sm font-medium">消光灰-特殊漆 (+ $25,000)</span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. 輪圈 (Wheels) -->
+                <section>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">4. 輪圈</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="wheels" value="18inch" data-price="0" checked class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">18吋Terra Basic 100T雙色切削鋁圈</span>
+                            <span class="ml-3 text-sm text-gray-600 block">245/45 R18 ($0)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="wheels" value="19inch" data-price="50000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">19吋Terra Plus 200T雙色切削鋁圈</span>
+                            <span class="ml-3 text-sm text-gray-600 block">245/40 R19 (+ $50,000)</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- 5. 內裝 (Interior) -->
+                <section>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">5. 內裝 - 座椅</h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                        <!-- Seat Options -->
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="seats" value="black-pvc" data-price="0" checked class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra Black 皮質 ($0)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="seats" value="brown-pvc" data-price="0" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra Brown 皮質 ($0)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="seats" value="prem-black" data-price="80000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra Premium Black 真皮 (+ $80,000)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="seats" value="prem-brown" data-price="80000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra Premium Brown 真皮 (+ $80,000)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="seats" value="prem-b/r" data-price="85000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra Premium Black/Red 真皮 (+ $85,000)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="seats" value="zsport-black" data-price="100000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Z Sport Black 真皮跑車座椅 (+ $100,000)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="seats" value="zsport-b/r" data-price="110000" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Z Sport Black/Red 真皮跑車座椅 (+ $110,000)</span>
+                        </label>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 mt-8">5. 內裝 - 飾板</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- Trim Options -->
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="trim" value="dark-alum" data-price="0" checked class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra 深色鋁質飾板 ($0)</span>
+                        </label>
+                        <label class="config-option p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="trim" value="matte-black" data-price="0" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">Terra 黑色鋁質霧面飾板 ($0)</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- 6. 專屬配備 (Exclusive Equipment) - Checkboxes -->
+                <section>
+                    <h3 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">6. 專屬配備 (可複選)</h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Checkbox Option Template -->
+                        <label class="config-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-green-500 has-[:checked]:bg-green-50">
+                            <input type="checkbox" name="equipment" value="privacy-glass" data-price="28000" class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">後座暗色隔熱玻璃</span>
+                            <span class="ml-auto text-sm text-green-600 font-bold">+ $28,000</span>
+                        </label>
+                        <label class="config-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-green-500 has-[:checked]:bg-green-50">
+                            <input type="checkbox" name="equipment" value="anti-theft-bolt" data-price="2500" class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">防盜螺栓</span>
+                            <span class="ml-auto text-sm text-green-600 font-bold">+ $2,500</span>
+                        </label>
+                        <label class="config-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-green-500 has-[:checked]:bg-green-50">
+                            <input type="checkbox" name="equipment" value="alarm-system" data-price="30000" class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">防盜警報系統</span>
+                            <span class="ml-auto text-sm text-green-600 font-bold">+ $30,000</span>
+                        </label>
+                        <label class="config-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-green-500 has-[:checked]:bg-green-50">
+                            <input type="checkbox" name="equipment" value="heated-seats" data-price="50000" class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">前後座加熱+通風座椅</span>
+                            <span class="ml-auto text-sm text-green-600 font-bold">+ $50,000</span>
+                        </label>
+                        <label class="config-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-200 has-[:checked]:border-green-500 has-[:checked]:bg-green-50">
+                            <input type="checkbox" name="equipment" value="active-safety" data-price="20000" class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                            <span class="ml-3 font-semibold text-gray-900 block">主動安全防護系統</span>
+                            <span class="ml-auto text-sm text-green-600 font-bold">+ $20,000</span>
+                        </label>
+                    </div>
+                </section>
+
+            </div>
+        </form>
+
+        <!-- 總價/動作區塊 (已移至頁面最下方) -->
+        <div class="bg-gray-800 text-white p-6 rounded-xl shadow-xl flex flex-col justify-between mt-10">
+            <div>
+                <p class="text-xl font-medium mb-2">總價</p>
+                <div id="total-price" class="text-5xl font-extrabold tracking-tight">$2,100,000</div>
+                <p class="text-sm text-gray-400 mt-2">包含所有選配與基本車價</p>
+            </div>
+            
+            <button onclick="window.open('https://hc-cars-taiwan.webnode.page/car-model-information', '_blank')"
+                    class="w-full mt-6 px-6 py-3 bg-red-600 text-white text-lg font-bold rounded-lg hover:bg-red-700 transition duration-150 shadow-2xl shadow-red-500/50">
+                預約試駕
+            </button>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-gray-900 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center text-sm">
+            <!-- 左側版權資訊 -->
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                &copy; HC 台灣總代理 誠德
+            </div>
+
+            <!-- 右側連結群組 -->
+            <div class="flex flex-wrap justify-center md:justify-end space-x-4">
+                <a href="#" onclick="window.open('https://hc-cars-taiwan.webnode.page/car-model-information', '_blank')" class="hover:text-red-400 transition duration-150">法律聲明和隱私權政策</a>
+                <a href="#" onclick="window.open('https://hc-cars-taiwan.webnode.page/car-model-information', '_blank')" class="hover:text-red-400 transition duration-150">聯絡我們</a>
+                <a href="#" onclick="window.open('https://hc-cars-taiwan.webnode.page/car-model-information', '_blank')" class="hover:text-red-400 transition duration-150">回到首頁</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('config-form');
+            const totalPriceDisplay = document.getElementById('total-price');
+            const previewColorSpan = document.getElementById('preview-color');
+
+            // 格式化價格為帶有逗號和貨幣符號的字串
+            function formatPrice(price) {
+                return '$' + price.toLocaleString('zh-TW', { style: 'decimal' });
+            }
+
+            // 主要價格計算邏輯
+            function calculateTotal() {
+                let total = 0;
+                let selectedColor = "白-標準漆"; // 預設顏色
+                
+                // 取得所有選取的選項 (Radio buttons and Checkboxes)
+                const selectedOptions = form.querySelectorAll('input:checked');
+
+                // 遍歷所有選取的選項並累加價格
+                selectedOptions.forEach(input => {
+                    const price = parseInt(input.getAttribute('data-price') || 0);
+                    total += price;
+
+                    // 同時更新顏色預覽文字
+                    if (input.name === 'color') {
+                        // 取得父層 label/div 內的文字作為顯示名稱
+                        const labelText = input.closest('div').querySelector('span').textContent;
+                        selectedColor = labelText.split('(')[0].trim(); // 僅取括號前的文字
+                    }
+                });
+
+                // 更新總價顯示
+                totalPriceDisplay.textContent = formatPrice(total);
+                // 更新顏色預覽
+                previewColorSpan.textContent = selectedColor;
+            }
+
+            // 為所有表單元素添加事件監聽器，以便在值更改時重新計算
+            form.querySelectorAll('input').forEach(input => {
+                input.addEventListener('change', calculateTotal);
+            });
+
+            // 初始計算以顯示正確的預設價格
+            calculateTotal();
+        });
+    </script>
+</body>
+</html>
